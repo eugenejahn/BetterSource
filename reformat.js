@@ -179,6 +179,7 @@
 // reformatSource();
 
 
+// change the display of the scoreform div 
 function toggle() {
 
   var x = document.getElementById("scoreform"); 
@@ -208,10 +209,14 @@ function toggle() {
 
 
 document.addEventListener('DOMContentLoaded', function() {
+
+    // listner for newsScoreButton
     document.getElementById("newScoreButton").addEventListener("click",
         function() {
       toggle();
     }, false);
+
+    // listner for submitScoreButton
     document.getElementById("submitScoreButton").addEventListener("click",
         function() {
       toggle();
