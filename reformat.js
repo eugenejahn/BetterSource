@@ -191,19 +191,44 @@ function toggle() {
   }
 }
 
+function getScore(){
+  var tittle = document.getElementById('tittle');
+  var assignmentScore = document.getElementById('assignmentScore');
+  var overAllScore = document.getElementById('overAllScore');
+  var category = document.getElementById('category');
+  
+  tittle = tittle.value;
+  assignmentScore = assignmentScore.value;
+  overAllScore = overAllScore.value;
+  category = category.value;
 
+  
 
-// document.getElementById("newScoreButton").addEventListener("click", function(){
-//     alert("ffff");
-//     toggle();
-// });
+  newElement(tittle,assignmentScore,overAllScore,category);
+}
 
-// document.getElementById("submitScoreButton").addEventListener("click", function(){
-//     alert("ffff");
-//     toggle();
-// });
+function newElement(tittle, assignmentScore , overAllScore, category) {
+  var li = document.createElement("li");
+  var inputValue = tittle + " "+ category + " " + assignmentScore + "/" + overAllScore;
+  var t = document.createTextNode(inputValue);
+  li.appendChild(t);
 
+  document.getElementById("myUL").appendChild(li);
+  
 
+  // var span = document.createElement("SPAN");
+  // var txt = document.createTextNode("\u00D7");
+  // span.className = "close";
+  // span.appendChild(txt);
+  // li.appendChild(span);
+
+  for (i = 0; i < close.length; i++) {
+    close[i].onclick = function() {
+      var div = this.parentElement;
+      div.style.display = "none";
+    }
+  }
+}
 
 
 
@@ -219,6 +244,8 @@ document.addEventListener('DOMContentLoaded', function() {
     // listner for submitScoreButton
     document.getElementById("submitScoreButton").addEventListener("click",
         function() {
-      toggle();
+        getScore();
+        toggle();
+      
     }, false);
 });
