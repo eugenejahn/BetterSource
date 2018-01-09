@@ -194,21 +194,21 @@ function toggle() {
 function getScore(){
   var tittle = document.getElementById('tittle');
   var assignmentScore = document.getElementById('assignmentScore');
-  var overAllScore = document.getElementById('overAllScore');
+  var overallScore = document.getElementById('overallScore');
   var category = document.getElementById('category');
   
   tittle = tittle.value;
   assignmentScore = assignmentScore.value;
-  overAllScore = overAllScore.value;
+  overallScore = overallScore.value;
   category = category.value;
 
-  return[tittle,assignmentScore,overAllScore,category];
+  return[tittle,assignmentScore,overallScore,category];
 }
 
 function cleanUp(){
   document.getElementById('tittle').value = "";
   document.getElementById('assignmentScore').value = "";
-  document.getElementById('overAllScore').value = "";
+  document.getElementById('overallScore').value = "";
   document.getElementById('category').value = "";
 }
 
@@ -224,16 +224,19 @@ function addNewScore() {
   var newScoreList = getScore();
   var tittle = newScoreList[0];
   var assignmentScore= newScoreList[1];
-  var overAllScore= newScoreList[2];
+  var overallScore= newScoreList[2];
   var category = newScoreList[3];
 
   // create new li 
-  if ( tittle !== "" &&  assignmentScore !== "" && overAllScore !== "" && category !==""){
+  if ( tittle !== "" &&  assignmentScore !== "" && overallScore !== "" && category !==""){
     // check score is a number
-    if (isNumber(assignmentScore) && isNumber(overAllScore)){
+    if (isNumber(assignmentScore) && isNumber(overallScore)){
       var li = document.createElement("li");
+      var percentScore = assignmentScore/overallScore;
+      var gradeLetter = percentScore >= .93 ? 'A' : percentScore >= .9 ? 'A-' : percentScore >= .86 ? 'B+' : percentScore >= .83 ? 'B' : percentScore >= .8 ? 'B-' : 'E';
+
       // create input value
-      var inputValue = tittle + " "+ category + " " + assignmentScore + "/" + overAllScore;
+      var inputValue = category + " "+ tittle + " " + assignmentScore + "/" + overallScore + " " + gradeLetter + (percentScore * 100) + '%';
       var tmp = document.createTextNode(inputValue);
       // add inputvalue into li
       li.appendChild(tmp);
