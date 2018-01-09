@@ -235,6 +235,9 @@ function addNewScore() {
       var percentScore = assignmentScore/overallScore;
       var gradeLetter = percentScore >= .93 ? 'A' : percentScore >= .9 ? 'A-' : percentScore >= .86 ? 'B+' : percentScore >= .83 ? 'B' : percentScore >= .8 ? 'B-' : 'E';
 
+      // round the percent to 1 decimal
+      percentScore = percentScore.toFixed(3);
+
       // create input value
       var inputValue = category + " "+ tittle + " " + assignmentScore + "/" + overallScore + " " + gradeLetter + (percentScore * 100) + '%';
       var tmp = document.createTextNode(inputValue);
