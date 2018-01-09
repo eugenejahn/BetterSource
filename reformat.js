@@ -191,6 +191,8 @@ function toggle() {
   }
 }
 
+
+// 
 function getScore(){
   var tittle = document.getElementById('tittle');
   var assignmentScore = document.getElementById('assignmentScore');
@@ -202,17 +204,26 @@ function getScore(){
   overAllScore = overAllScore.value;
   category = category.value;
 
-  
-
-  newElement(tittle,assignmentScore,overAllScore,category);
+  return[tittle,assignmentScore,overAllScore,category];
 }
 
-function newElement(tittle, assignmentScore , overAllScore, category) {
-  var li = document.createElement("li");
-  var inputValue = tittle + " "+ category + " " + assignmentScore + "/" + overAllScore;
-  var t = document.createTextNode(inputValue);
-  li.appendChild(t);
+function addNewScore() {
 
+  // get score from getScore 
+  var newScoreList = getScore();
+  var tittle = newScoreList[0];
+  var assignmentScore= newScoreList[1];
+  var overAllScore= newScoreList[2];
+  var category = newScoreList[3];
+
+  // create new li 
+  var li = document.createElement("li");
+  // create input value
+  var inputValue = tittle + " "+ category + " " + assignmentScore + "/" + overAllScore;
+  var tmp = document.createTextNode(inputValue);
+  // add inputvalue into li
+  li.appendChild(tmp);
+  // add li to popup.html
   document.getElementById("myUL").appendChild(li);
   
 
@@ -222,12 +233,13 @@ function newElement(tittle, assignmentScore , overAllScore, category) {
   // span.appendChild(txt);
   // li.appendChild(span);
 
-  for (i = 0; i < close.length; i++) {
-    close[i].onclick = function() {
-      var div = this.parentElement;
-      div.style.display = "none";
-    }
-  }
+
+  // for (i = 0; i < close.length; i++) {
+  //   close[i].onclick = function() {
+  //     var div = this.parentElement;
+  //     div.style.display = "none";
+  //   }
+  // }
 }
 
 
@@ -244,7 +256,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // listner for submitScoreButton
     document.getElementById("submitScoreButton").addEventListener("click",
         function() {
-        getScore();
+        addNewScore();
         toggle();
       
     }, false);
