@@ -120,8 +120,8 @@
 
 //     var gradeBadge = document.createElement("div");
 //     gradeBadge.style = "display: inline-block; float:left; text-align: center; font-weight: bold; padding: 0 5px;";
-// 	var letter = classInfo[3].innerText.substring(0 ,classInfo[3].innerText.indexOf(" "));
-// 	var num = classInfo[3].innerText.substring(classInfo[3].innerText.indexOf(" ")).replace(new RegExp(" ", 'g'), "").replace(new RegExp("\u00a0", 'g'), "").replace("%","");
+//  var letter = classInfo[3].innerText.substring(0 ,classInfo[3].innerText.indexOf(" "));
+//  var num = classInfo[3].innerText.substring(classInfo[3].innerText.indexOf(" ")).replace(new RegExp(" ", 'g'), "").replace(new RegExp("\u00a0", 'g'), "").replace("%","");
 
 //     gradeBadge.innerHTML = letter + "<br>" + num + "%";
 //     gradeBadge.style.background = getColor(parseInt(num));
@@ -191,8 +191,6 @@ function toggle() {
   }
 }
 
-
-// 
 function getScore(){
   var tittle = document.getElementById('tittle');
   var assignmentScore = document.getElementById('assignmentScore');
@@ -207,6 +205,19 @@ function getScore(){
   return[tittle,assignmentScore,overAllScore,category];
 }
 
+function cleanUp(){
+  document.getElementById('tittle').value = "";
+  document.getElementById('assignmentScore').value = "";
+  document.getElementById('overAllScore').value = "";
+  document.getElementById('category').value = "";
+}
+
+//check is string a number
+function isNumber(n) {
+
+  return !isNaN(parseFloat(n)) && isFinite(n);
+}
+
 function addNewScore() {
 
   // get score from getScore 
@@ -217,29 +228,45 @@ function addNewScore() {
   var category = newScoreList[3];
 
   // create new li 
-  var li = document.createElement("li");
-  // create input value
-  var inputValue = tittle + " "+ category + " " + assignmentScore + "/" + overAllScore;
-  var tmp = document.createTextNode(inputValue);
-  // add inputvalue into li
-  li.appendChild(tmp);
-  // add li to popup.html
-  document.getElementById("myUL").appendChild(li);
-  
+  if ( tittle !== "" &&  assignmentScore !== "" && overAllScore !== "" && category !==""){
+    // check score is a number
+    if (isNumber(assignmentScore) && isNumber(overAllScore)){
+      var li = document.createElement("li");
+      // create input value
+      var inputValue = tittle + " "+ category + " " + assignmentScore + "/" + overAllScore;
+      var tmp = document.createTextNode(inputValue);
+      // add inputvalue into li
+      li.appendChild(tmp);
+      // add li to popup.html
+      document.getElementById("myUL").appendChild(li);
 
-  // var span = document.createElement("SPAN");
-  // var txt = document.createTextNode("\u00D7");
-  // span.className = "close";
-  // span.appendChild(txt);
-  // li.appendChild(span);
+        // var span = document.createElement("SPAN");
+    // var txt = document.createTextNode("\u00D7");
+    // span.className = "close";
+    // span.appendChild(txt);
+    // li.appendChild(span);
 
 
-  // for (i = 0; i < close.length; i++) {
-  //   close[i].onclick = function() {
-  //     var div = this.parentElement;
-  //     div.style.display = "none";
-  //   }
-  // }
+    // for (i = 0; i < close.length; i++) {
+    //   close[i].onclick = function() {
+    //     var div = this.parentElement;
+    //     div.style.display = "none";
+    //   }
+    // }
+
+      // clean up the form 
+      cleanUp();
+      // hide the form
+      toggle();
+    }else{
+      alert("Pleaze enter a number not random characters!")
+    }
+
+  }else{
+    alert("You didn't fill out yet!")
+  }
+
+
 }
 
 
@@ -257,7 +284,7 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById("submitScoreButton").addEventListener("click",
         function() {
         addNewScore();
-        toggle();
+        // I put toggle into addNewScore
       
     }, false);
 });
