@@ -183,7 +183,7 @@
 var pointsPossible = 0;
 var pointsEarned = 0;
 var categories = [];
-function toggle() {
+function toggleScoreForm() {
 
   var x = document.getElementById("scoreform"); 
 
@@ -206,6 +206,13 @@ function getScore(){
   category = category.value;
 
   return[tittle,assignmentScore,overallScore,category];
+}
+function getCategory() {
+  var title = document.getElementById('newCategoryName');
+  var weight = document.getElementById('newCategoryWeight');
+  title = title.value;
+  weight = weight.weight;
+  return[title, weight];
 }
 
 function cleanUp(){
@@ -281,7 +288,9 @@ function addNewScore() {
 
 }
 
+function addCategory() {
 
+}
 
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -299,4 +308,9 @@ document.addEventListener('DOMContentLoaded', function() {
         // I put toggle into addNewScore
       
     }, false);
+    document.getElementById("addCategoryButton").addEventListener("click",
+      function() {
+        addCategory();
+      }
+    )
 });

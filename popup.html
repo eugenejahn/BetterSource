@@ -40,11 +40,16 @@
   <div id="scoreform">
     Assignment Tittle: <input type="text"  id ="tittle"><br>
     Score: <input type="text"  id="assignmentScore"> / <input type="text"  id="overallScore"><br>
-    Category: <input type="text"  id = "category"> <br>
-    <button  id= "submitScoreButton">Submit</button>
+    Category: 
+      <select id="categoryList">
+        <option>Test</option>
+      </select> 
+      <button id = "addCategoryButton">+</button><br>
+      <button  id= "submitScoreButton">Submit</button>
   </div>
-  <div id="category form">
-
+  <div id="categoryform">
+      Category Name: <input type="text" id="newCategoryName"><br> Weight: <input type="text" id="newCategoryWeight">
+      <button id = "submitCategoryButton"> done </button>
   </div>
 
 
