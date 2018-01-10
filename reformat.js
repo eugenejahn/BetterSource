@@ -187,19 +187,19 @@ function toggleScoreForm() {
 
   var x = document.getElementById("scoreform"); 
 
-  if (x.style.display === "none") {
-      x.style.display = "block";
-  } else {
+  if (x.style.display === "block") {
       x.style.display = "none";
+  } else {
+      x.style.display = "block";
   }
 }
 function toggleCategoryForm() {
   var x = document.getElementById("categoryform"); 
 
-  if (x.style.display === "none") {
-      x.style.display = "block";
-  } else {
+  if (x.style.display === "block") {
       x.style.display = "none";
+  } else {
+      x.style.display = "block";
   }
 }
 
