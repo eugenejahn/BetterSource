@@ -182,6 +182,7 @@
 // change the display of the scoreform div 
 var pointsPossible = 0;
 var pointsEarned = 0;
+var categories = [];
 function toggle() {
 
   var x = document.getElementById("scoreform"); 
@@ -241,10 +242,10 @@ function addNewScore() {
       var classScore = ((pointsEarned/pointsPossible) * 100).toFixed(3);
       document.getElementById("score").innerHTML = String(classScore + '%'); 
       // round the percent to 1 decimal
-      percentScore = percentScore.toFixed(3);
+      percentScore = (percentScore * 100).toFixed(1);
 
       // create input value
-      var inputValue = category + " "+ tittle + " " + assignmentScore + "/" + overallScore + " " + gradeLetter + (percentScore * 100) + '%';
+      var inputValue = category + " "+ tittle + " " + assignmentScore + "/" + overallScore + " " + gradeLetter + (percentScore) + '%';
       var tmp = document.createTextNode(inputValue);
       // add inputvalue into li
       li.appendChild(tmp);
