@@ -180,6 +180,8 @@
 
 
 // change the display of the scoreform div 
+var pointsPossible = 0;
+var pointsEarned = 0;
 function toggle() {
 
   var x = document.getElementById("scoreform"); 
@@ -234,7 +236,10 @@ function addNewScore() {
       var li = document.createElement("li");
       var percentScore = assignmentScore/overallScore;
       var gradeLetter = percentScore >= .93 ? 'A' : percentScore >= .9 ? 'A-' : percentScore >= .86 ? 'B+' : percentScore >= .83 ? 'B' : percentScore >= .8 ? 'B-' : 'E';
-
+      pointsEarned += assignmentScore;
+      pointsPossible += overallScore;
+      var classScore = ((pointsEarned/pointsPossible) * 100).toFixed(3);
+      document.getElementById("score").innerHTML = String(classScore + '%'); 
       // round the percent to 1 decimal
       percentScore = percentScore.toFixed(3);
 
