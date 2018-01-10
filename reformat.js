@@ -207,14 +207,14 @@ function getScore(){
   var tittle = document.getElementById('tittle');
   var assignmentScore = document.getElementById('assignmentScore');
   var overallScore = document.getElementById('overallScore');
-  var category = document.getElementById('category');
+  //var category = document.getElementById('category');
   
   tittle = tittle.value;
   assignmentScore = assignmentScore.value;
   overallScore = overallScore.value;
-  category = category.value;
+  //category = category.value;
 
-  return[tittle,assignmentScore,overallScore,category];
+  return[tittle,assignmentScore,overallScore];
 }
 function getCategory() {
   var title = document.getElementById('newCategoryName');
@@ -228,7 +228,7 @@ function cleanUp(){
   document.getElementById('tittle').value = "";
   document.getElementById('assignmentScore').value = "";
   document.getElementById('overallScore').value = "";
-  document.getElementById('category').value = "";
+  //document.getElementById('category').value = "";
 }
 
 //check is string a number
@@ -244,10 +244,10 @@ function addNewScore() {
   var tittle = newScoreList[0];
   var assignmentScore= newScoreList[1];
   var overallScore= newScoreList[2];
-  var category = newScoreList[3];
+  //var category = newScoreList[3];
 
   // create new li 
-  if ( tittle !== "" &&  assignmentScore !== "" && overallScore !== "" && category !==""){
+  if ( tittle !== "" &&  assignmentScore !== "" && overallScore !== "" ){
     // check score is a number
     if (isNumber(assignmentScore) && isNumber(overallScore)){
       var li = document.createElement("li");
@@ -255,13 +255,13 @@ function addNewScore() {
       var gradeLetter = percentScore >= .93 ? 'A' : percentScore >= .9 ? 'A-' : percentScore >= .86 ? 'B+' : percentScore >= .83 ? 'B' : percentScore >= .8 ? 'B-' : 'E';
       pointsEarned += assignmentScore;
       pointsPossible += overallScore;
-      var classScore = ((pointsEarned/pointsPossible) * 100).toFixed(3);
+      var classScore = ((pointsEarned/pointsPossible) * 100).toFixed(1);
       document.getElementById("score").innerHTML = String(classScore + '%'); 
       // round the percent to 1 decimal
       percentScore = (percentScore * 100).toFixed(1);
 
       // create input value
-      var inputValue = category + " "+ tittle + " " + assignmentScore + "/" + overallScore + " " + gradeLetter + (percentScore) + '%';
+      var inputValue =  tittle + " " + assignmentScore + "/" + overallScore + " " + gradeLetter + " "percentScore + '%';
       var tmp = document.createTextNode(inputValue);
       // add inputvalue into li
       li.appendChild(tmp);
@@ -285,7 +285,7 @@ function addNewScore() {
       // clean up the form 
       cleanUp();
       // hide the form
-      toggle();
+      toggleScoreForm();
     }else{
       alert("Pleaze enter a number not random characters!")
     }
