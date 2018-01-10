@@ -261,7 +261,7 @@ function addNewScore() {
       percentScore = (percentScore * 100).toFixed(1);
 
       // create input value
-      var inputValue =  tittle + " " + assignmentScore + "/" + overallScore + " " + gradeLetter + " "percentScore + '%';
+      var inputValue =  tittle + " " + assignmentScore + "/" + overallScore + " " + gradeLetter + " " + percentScore + '%';
       var tmp = document.createTextNode(inputValue);
       // add inputvalue into li
       li.appendChild(tmp);
