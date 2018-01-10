@@ -310,8 +310,10 @@ function addCategory() {
   if ( title !== "" && weight !== ""){
     // check score is a number
     if (isNumber(weight)){
-
-      document.getElementById("categoryList").add(title);      
+      var opt = document.createElement('option');
+      opt.value = title;
+      opt.innerHTML = title;
+      document.getElementById("categoryList").appendChild(opt);      
       toggleCategoryForm();
     }else{
       alert("Pleaze enter a number not random characters!")
