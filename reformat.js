@@ -193,6 +193,15 @@ function toggleScoreForm() {
       x.style.display = "none";
   }
 }
+function toggleCategoryForm() {
+  var x = document.getElementById("categoryform"); 
+
+  if (x.style.display === "none") {
+      x.style.display = "block";
+  } else {
+      x.style.display = "none";
+  }
+}
 
 function getScore(){
   var tittle = document.getElementById('tittle');
@@ -298,7 +307,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // listner for newsScoreButton
     document.getElementById("newScoreButton").addEventListener("click",
         function() {
-      toggle();
+      toggleScoreForm();
     }, false);
 
     // listner for submitScoreButton
@@ -310,7 +319,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }, false);
     document.getElementById("addCategoryButton").addEventListener("click",
       function() {
-        addCategory();
+        toggleCategoryForm();
       }
     )
 });
