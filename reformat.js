@@ -322,4 +322,9 @@ document.addEventListener('DOMContentLoaded', function() {
         toggleCategoryForm();
       }
     )
+    document.getElementById("submitCategoryButton").addEventListener("click",
+        function() {
+          toggleCategoryForm();
+        }
+    )
 });
