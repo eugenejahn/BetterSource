@@ -220,7 +220,7 @@ function getCategory() {
   var title = document.getElementById('newCategoryName');
   var weight = document.getElementById('newCategoryWeight');
   title = title.value;
-  weight = weight.weight;
+  weight = weight.value;
   return[title, weight];
 }
 
@@ -307,7 +307,7 @@ function addCategory() {
   //var category = newScoreList[3];
 
   // create new li 
-  if ( tittle !== "" && weight !== ""){
+  if ( title !== "" && weight !== ""){
     // check score is a number
     if (isNumber(weight)){
 
@@ -346,8 +346,7 @@ document.addEventListener('DOMContentLoaded', function() {
     )
     document.getElementById("submitCategoryButton").addEventListener("click",
         function() {
-
-          
+          addCategory();
         }
     )
 });
