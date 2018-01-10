@@ -298,7 +298,25 @@ function addNewScore() {
 }
 
 function addCategory() {
+  var newCategoryList = getCategory();
+  var title = newCategoryList[0];
+  var weight = newCategoryList[1]
+  //var category = newScoreList[3];
 
+  // create new li 
+  if ( tittle !== "" && weight !== ""){
+    // check score is a number
+    if (isNumber(weight)){
+
+      document.getElementById("categoryList").add(title);      
+      toggleCategoryForm();
+    }else{
+      alert("Pleaze enter a number not random characters!")
+    }
+
+  }else{
+    alert("You didn't fill out yet!")
+  }
 }
 
 
@@ -324,7 +342,8 @@ document.addEventListener('DOMContentLoaded', function() {
     )
     document.getElementById("submitCategoryButton").addEventListener("click",
         function() {
-          toggleCategoryForm();
+
+          
         }
     )
 });
