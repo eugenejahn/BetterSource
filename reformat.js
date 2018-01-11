@@ -239,7 +239,7 @@ function addNewScore() {
       percentScore = percentScore.toFixed(3);
 
       // create input value
-      var inputValue = category + " "+ tittle + " " + assignmentScore + "/" + overallScore + " " + gradeLetter + (percentScore * 100) + '%';
+      var inputValue = category + " "+ tittle + " " + assignmentScore + "/" + overallScore + " " + gradeLetter + " "+ (percentScore * 100) + '%';
       var tmp = document.createTextNode(inputValue);
       // add inputvalue into li
       li.appendChild(tmp);
