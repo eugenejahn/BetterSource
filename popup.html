@@ -5,26 +5,9 @@
 	  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" type="text/css" href="sourceStyle.css">
     <script src="reformat.js"></script>
-
-<!--     <style type="text/css">
-      body {
-        margin: 10px;
-      }
-
-      h1 {
-        font-size: 15px;
-        color: navy;
-      }
-
-      #container {
-        align-items: center;
-        display: flex;
-        justify-content: space-between;
-      }
-    </style> -->
-
-
   </head>
+
+
 
   <body>
     <div style="width:300px">
@@ -38,25 +21,30 @@
 	</div>	
 
   <div id="scoreform">
-    Assignment Tittle: <input type="text"  id ="tittle"><br>
-    Score: <input type="text"  id="assignmentScore"> / <input type="text"  id="overallScore"><br>
+    Assignment Tittle: <input type="text"  id ="tittle" maxlength="10"><br>
+    Score: <input type="text"  id="assignmentScore" maxlength="4"> / <input type="text"  id="overallScore" maxlength="4">
+
+    <!-- et the gap  -->
+    <div style="height:5px;font-size:1px;">&nbsp;</div>
+
     Category: 
       <select id="categoryList">
         <option>Test</option>
       </select> 
-      <button id = "addCategoryButton">+</button><br>
+      <button class="w3-button w3-xlarge w3-teal" id = "addCategoryButton">+</button><br>
       <div id="categoryform">
         Category Name: <input type="text" id="newCategoryName"><br> Weight: <input type="text" id="newCategoryWeight">
         <button id = "submitCategoryButton"> done </button>
       </div>
       <button  id= "submitScoreButton">Submit</button>
+
   </div>
   
 
 
-  <ul id="myUL">
+    <ul id="myUL">
+    </ul>
 
-  </ul>
 
   </body>
 </html>
