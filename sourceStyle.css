@@ -23,8 +23,8 @@ input[type="text"] {
 	background: transparent;
     border: none;
     border-bottom: 1px solid #000000;
-        padding: 2px 5px;
-        outline: none;
+    padding: 2px 5px;
+    outline: none;
 
 
     width: 100px;
@@ -36,6 +36,13 @@ input[type="text"] {
 
 	display: none;
 }
+
 #categoryform{
   display: none;
+}
+
+#addCategoryButton{
+  padding: 3px 7px;
+  font-size: 15px!important;
+
 }
