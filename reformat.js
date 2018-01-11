@@ -255,7 +255,7 @@ function addNewScore() {
       var percentScore = assignmentScore/overallScore;
       var gradeLetter = percentScore >= .93 ? 'A' : percentScore >= .9 ? 'A-' : percentScore >= .86 ? 'B+' : percentScore >= .83 ? 'B' : percentScore >= .8 ? 'B-' : 'E';
       pointsEarned = parseFloat(pointsEarned);
-      pointsPossible = parseFloat(pointsPossible)
+      pointsPossible = parseFloat(pointsPossible);
       pointsEarned += parseFloat(assignmentScore);
       pointsPossible += parseFloat(overallScore);
       var classScore = ((pointsEarned/pointsPossible) * 100).toFixed(2);
@@ -306,6 +306,10 @@ function addCategory() {
   var newCategoryList = getCategory();
   var title = newCategoryList[0];
   var weight = newCategoryList[1]
+  var category = Object();
+  category.title = title;
+  category.weight = weight;
+  category.grades = [];
   //var category = newScoreList[3];
 
   // create new li 
@@ -313,9 +317,12 @@ function addCategory() {
     // check score is a number
     if (isNumber(weight)){
       var opt = document.createElement('option');
+
+      
       opt.value = title;
       opt.innerHTML = title;
-      document.getElementById("categoryList").appendChild(opt);      
+      document.getElementById("categoryList").appendChild(opt);
+      categories.push(category);      
       toggleCategoryForm();
     }else{
       alert("Pleaze enter a number not random characters!")
