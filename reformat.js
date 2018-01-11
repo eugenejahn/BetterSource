@@ -120,8 +120,8 @@
 
 //     var gradeBadge = document.createElement("div");
 //     gradeBadge.style = "display: inline-block; float:left; text-align: center; font-weight: bold; padding: 0 5px;";
-// 	var letter = classInfo[3].innerText.substring(0 ,classInfo[3].innerText.indexOf(" "));
-// 	var num = classInfo[3].innerText.substring(classInfo[3].innerText.indexOf(" ")).replace(new RegExp(" ", 'g'), "").replace(new RegExp("\u00a0", 'g'), "").replace("%","");
+//  var letter = classInfo[3].innerText.substring(0 ,classInfo[3].innerText.indexOf(" "));
+//  var num = classInfo[3].innerText.substring(classInfo[3].innerText.indexOf(" ")).replace(new RegExp(" ", 'g'), "").replace(new RegExp("\u00a0", 'g'), "").replace("%","");
 
 //     gradeBadge.innerHTML = letter + "<br>" + num + "%";
 //     gradeBadge.style.background = getColor(parseInt(num));
@@ -180,31 +180,169 @@
 
 
 // change the display of the scoreform div 
-function toggle() {
+var pointsPossible = 0;
+var pointsEarned = 0;
+var categories = [];
+function toggleScoreForm() {
 
   var x = document.getElementById("scoreform"); 
 
-  if (x.style.display === "none") {
-      x.style.display = "block";
-  } else {
+  if (x.style.display === "block") {
       x.style.display = "none";
+  } else {
+      x.style.display = "block";
+  }
+}
+function toggleCategoryForm() {
+  var x = document.getElementById("categoryform"); 
+
+  if (x.style.display === "block") {
+      x.style.display = "none";
+  } else {
+      x.style.display = "block";
   }
 }
 
+function getScore(){
+  var tittle = document.getElementById('tittle');
+  var assignmentScore = document.getElementById('assignmentScore');
+  var overallScore = document.getElementById('overallScore');
+  //var category = document.getElementById('category');
+  
+  tittle = tittle.value;
+  assignmentScore = assignmentScore.value;
+  overallScore = overallScore.value;
+  //category = category.value;
+
+  return[tittle,assignmentScore,overallScore];
+}
+function getCategory() {
+  var title = document.getElementById('newCategoryName');
+  var weight = document.getElementById('newCategoryWeight');
+  title = title.value;
+  weight = weight.value;
+  return[title, weight];
+}
+
+function cleanUpScoreForm(){
+  document.getElementById('tittle').value = "";
+  document.getElementById('assignmentScore').value = "";
+  document.getElementById('overallScore').value = "";
+  //document.getElementById('category').value = "";
+}
+
+function cleanUpCategoryForm(){
+  document.getElementById('newCategoryName').value = "";
+  document.getElementById('newCategoryWeight').value = "";
+}
+
+//check is string a number
+function isNumber(n) {
+
+  return !isNaN(parseFloat(n)) && isFinite(n);
+}
 
 
-// document.getElementById("newScoreButton").addEventListener("click", function(){
-//     alert("ffff");
-//     toggle();
-// });
+function addNewScore() {
 
-// document.getElementById("submitScoreButton").addEventListener("click", function(){
-//     alert("ffff");
-//     toggle();
-// });
+  // get score from getScore 
+  var newScoreList = getScore();
+  var tittle = newScoreList[0];
+  var assignmentScore= newScoreList[1];
+  var overallScore= newScoreList[2];
+  //var category = newScoreList[3];
+
+  // create new li 
+  if ( tittle !== "" &&  assignmentScore !== "" && overallScore !== "" ){
+    // check score is a number
+    if (isNumber(assignmentScore) && isNumber(overallScore)){
+      var li = document.createElement("li");
+      var percentScore = assignmentScore/overallScore;
+      var gradeLetter = percentScore >= .93 ? 'A' : percentScore >= .9 ? 'A-' : percentScore >= .86 ? 'B+' : percentScore >= .83 ? 'B' : percentScore >= .8 ? 'B-' : 'E';
+      pointsEarned = parseFloat(pointsEarned);
+      pointsPossible = parseFloat(pointsPossible);
+      pointsEarned += parseFloat(assignmentScore);
+      pointsPossible += parseFloat(overallScore);
+      var classScore = ((pointsEarned/pointsPossible) * 100).toFixed(2);
+      document.getElementById("score").innerHTML = String(classScore); 
+      // round the percent to 1 decimal
+      percentScore = (percentScore * 100).toFixed(1);
+
+      // round the percent to 1 decimal
+      
+
+      // create input value
+
+      var inputValue =  tittle + " " + assignmentScore + "/" + overallScore + " " + gradeLetter + " "+ (percentScore) + '%';
+
+      var inputValue =  tittle + " " + assignmentScore + "/" + overallScore + " " + gradeLetter + " " + percentScore + '%';
+
+      var tmp = document.createTextNode(inputValue);
+      // add inputvalue into li
+      li.appendChild(tmp);
+      // add li to popup.html
+      document.getElementById("myUL").appendChild(li);
 
 
+      var close = document.getElementsByClassName("close");
+      var span = document.createElement("SPAN");
+      var txt = document.createTextNode("\u00D7");
+      span.className = "close";
+      span.appendChild(txt);
+      li.appendChild(span);
 
+
+      for (i = 0; i < close.length; i++) {
+        close[i].onclick = function() {
+          var div = this.parentElement;
+          div.style.display = "none";
+        }
+      }
+
+      // clean up the form 
+      cleanUpScoreForm();
+      // hide the form
+      toggleScoreForm();
+    }else{
+      alert("Pleaze enter a number not random characters!")
+    }
+
+  }else{
+    alert("You didn't fill out yet!")
+  }
+}
+
+function addCategory() {
+  var newCategoryList = getCategory();
+  var title = newCategoryList[0];
+  var weight = newCategoryList[1]
+  var category = Object();
+  category.title = title;
+  category.weight = weight;
+  category.grades = [];
+  //var category = newScoreList[3];
+
+  // create new li 
+  if ( title !== "" && weight !== ""){
+    // check score is a number
+    if (isNumber(weight)){
+      var opt = document.createElement('option');
+
+      
+      opt.value = title;
+      opt.innerHTML = title;
+      document.getElementById("categoryList").appendChild(opt);
+      categories.push(category);      
+      toggleCategoryForm();
+      cleanUpCategoryForm();
+    }else{
+      alert("Pleaze enter a number not random characters!")
+    }
+
+  }else{
+    alert("You didn't fill out yet!")
+  }
+}
 
 
 
@@ -213,12 +351,24 @@ document.addEventListener('DOMContentLoaded', function() {
     // listner for newsScoreButton
     document.getElementById("newScoreButton").addEventListener("click",
         function() {
-      toggle();
+      toggleScoreForm();
     }, false);
 
     // listner for submitScoreButton
     document.getElementById("submitScoreButton").addEventListener("click",
         function() {
-      toggle();
+        addNewScore();
+        // I put toggle into addNewScore
+      
     }, false);
+    document.getElementById("addCategoryButton").addEventListener("click",
+      function() {
+        toggleCategoryForm();
+      }
+    )
+    document.getElementById("submitCategoryButton").addEventListener("click",
+        function() {
+          addCategory();
+        }
+    )
 });
