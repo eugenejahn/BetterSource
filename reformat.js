@@ -224,16 +224,11 @@ function getCategory() {
   return[title, weight];
 }
 
-function cleanUpScoreForm(){
+function cleanUp(){
   document.getElementById('tittle').value = "";
   document.getElementById('assignmentScore').value = "";
   document.getElementById('overallScore').value = "";
   //document.getElementById('category').value = "";
-}
-
-function cleanUpCategoryForm(){
-  document.getElementById('newCategoryName').value = "";
-  document.getElementById('newCategoryWeight').value = "";
 }
 
 //check is string a number
@@ -268,15 +263,8 @@ function addNewScore() {
       // round the percent to 1 decimal
       percentScore = (percentScore * 100).toFixed(1);
 
-      // round the percent to 1 decimal
-      
-
       // create input value
-
-      var inputValue =  tittle + " " + assignmentScore + "/" + overallScore + " " + gradeLetter + " "+ (percentScore) + '%';
-
       var inputValue =  tittle + " " + assignmentScore + "/" + overallScore + " " + gradeLetter + " " + percentScore + '%';
-
       var tmp = document.createTextNode(inputValue);
       // add inputvalue into li
       li.appendChild(tmp);
@@ -300,7 +288,7 @@ function addNewScore() {
       }
 
       // clean up the form 
-      cleanUpScoreForm();
+      cleanUp();
       // hide the form
       toggleScoreForm();
     }else{
@@ -310,6 +298,8 @@ function addNewScore() {
   }else{
     alert("You didn't fill out yet!")
   }
+
+
 }
 
 function addCategory() {
@@ -334,7 +324,6 @@ function addCategory() {
       document.getElementById("categoryList").appendChild(opt);
       categories.push(category);      
       toggleCategoryForm();
-      cleanUpCategoryForm();
     }else{
       alert("Pleaze enter a number not random characters!")
     }
