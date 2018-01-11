@@ -263,8 +263,8 @@ function addNewScore() {
       pointsPossible = parseFloat(pointsPossible)
       pointsEarned += parseFloat(assignmentScore);
       pointsPossible += parseFloat(overallScore);
-      var classScore = ((pointsEarned/pointsPossible) * 100);
-      document.getElementById("score").innerHTML = String(pointsEarned + '/' + pointsPossible); 
+      var classScore = ((pointsEarned/pointsPossible) * 100).toFixed(2);
+      document.getElementById("score").innerHTML = String(classScore); 
       // round the percent to 1 decimal
       percentScore = (percentScore * 100).toFixed(1);
 
