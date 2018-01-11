@@ -254,10 +254,12 @@ function addNewScore() {
       var li = document.createElement("li");
       var percentScore = assignmentScore/overallScore;
       var gradeLetter = percentScore >= .93 ? 'A' : percentScore >= .9 ? 'A-' : percentScore >= .86 ? 'B+' : percentScore >= .83 ? 'B' : percentScore >= .8 ? 'B-' : 'E';
-      pointsEarned += assignmentScore;
-      pointsPossible += overallScore;
-      var classScore = ((pointsEarned/pointsPossible) * 100).toFixed(1);
-      document.getElementById("score").innerHTML = String(classScore + '%'); 
+      pointsEarned = parseFloat(pointsEarned);
+      pointsPossible = parseFloat(pointsPossible)
+      pointsEarned += parseFloat(assignmentScore);
+      pointsPossible += parseFloat(overallScore);
+      var classScore = ((pointsEarned/pointsPossible) * 100);
+      document.getElementById("score").innerHTML = String(pointsEarned + '/' + pointsPossible); 
       // round the percent to 1 decimal
       percentScore = (percentScore * 100).toFixed(1);
 
