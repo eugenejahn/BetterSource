@@ -254,6 +254,7 @@ function addNewScore() {
   for(var i = 0; i < categories.length; ++i){
     if (categories[i].title === category) {
       categories[i].grades.push(score);
+      alert('score pushed to category' + category);
     }
   }
 
@@ -359,9 +360,10 @@ function addCategory() {
 function calculateOverallGrade(){
   weightSum = 0;
   pointsSum = 0;
-  for (var i = 0; i <categories.length; i++) {
+  for (var i = 0; i < categories.length; i++) {
     pointsEarnedSum = 0;
     pointsPossibleSum = 0;
+    alert(categories[i].grades.length)
     for (var j = 0; j < categories[i].grades.length; j++) {
       pointsEarnedSum += parseFloat(categories[i].grades[j].assignmentScore);
       pointsPossibleSum += parseFloat(categories[i].grades[j].overallScore);
