@@ -254,7 +254,7 @@ function addNewScore() {
   for(var i = 0; i < categories.length; ++i){
     if (categories[i].title === category) {
       categories[i].grades.push(score);
-      alert('score pushed to category' + category);
+      //alert('score pushed to category' + category);
     }
   }
 
@@ -266,7 +266,7 @@ function addNewScore() {
       var percentScore = score.assignmentScore/score.overallScore;
       var gradeLetter = percentScore >= .93 ? 'A' : percentScore >= .9 ? 'A-' : percentScore >= .86 ? 'B+' : percentScore >= .83 ? 'B' : percentScore >= .8 ? 'B-' : 'E';
       var overallGrade = calculateOverallGrade();
-      alert(overallGrade);
+      //alert(overallGrade);
       document.getElementById("score").innerHTML = String(overallGrade); 
       // round the percent to 1 decimal
 
@@ -363,12 +363,12 @@ function calculateOverallGrade(){
   for (var i = 0; i < categories.length; i++) {
     pointsEarnedSum = 0;
     pointsPossibleSum = 0;
-    alert(categories[i].grades.length)
+    //alert(categories[i].grades.length)
     for (var j = 0; j < categories[i].grades.length; j++) {
       pointsEarnedSum += parseFloat(categories[i].grades[j].assignmentScore);
       pointsPossibleSum += parseFloat(categories[i].grades[j].overallScore);
     }
-    weightSum += parseFloat(categories.weight);
+    weightSum += parseFloat(categories[i].weight);
     pointsSum += parseFloat(categories[i].weight * (pointsEarnedSum/pointsPossibleSum));
   }
   return parseFloat(pointsSum/weightSum);
