@@ -268,14 +268,12 @@ function addNewScore() {
       var overallGrade = calculateOverallGrade();
       //alert(overallGrade);
       document.getElementById("score").innerHTML = String(overallGrade); 
-      // round the percent to 1 decimal
 
-      // round the percent to 1 decimal
       
-
+      percentScore = (100*percentScore).toFixed(2)
       // create input value
 
-      var inputValue =  score.tittle + " " + score.assignmentScore+ "/" + score.overallScore + " " + gradeLetter + " "+ (percentScore) + '%';
+      
 
       var inputValue =  score.tittle + " " + score.assignmentScore+ "/" + score.overallScore + " " + gradeLetter + " " + percentScore + '%';
 
@@ -371,7 +369,9 @@ function calculateOverallGrade(){
     weightSum += parseFloat(categories[i].weight);
     pointsSum += parseFloat(categories[i].weight * (pointsEarnedSum/pointsPossibleSum));
   }
-  return parseFloat(pointsSum/weightSum);
+
+  // return two decinamls  
+  return  (100*pointsSum/weightSum).toFixed(2);
 }
 
 
