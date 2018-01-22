@@ -294,6 +294,23 @@ function addNewScore() {
 
       for (i = 0; i < close.length; i++) {
         close[i].onclick = function() {
+          var categoryIndex;
+          for(j = 0; j < categories.length; j++){
+            if (categories[j].title == category) {
+              categoryIndex = j;
+            }
+          }
+          var scoreIndex;
+          alert(categoryIndex);
+          for(j = 0; j < categories[categoryIndex].grades.length; j++){
+            if (score.tittle == categories[categoryIndex].grades[j].tittle) {
+              scoreIndex = j;
+            }
+          }
+
+          categories[categoryIndex].grades.splice(scoreIndex - 1, 1);
+          overallGrade = isNaN(calculateOverallGrade()) ? '' : calculateOverallGrade();
+          document.getElementById("score").innerHTML = String(overallGrade);
           var div = this.parentElement;
           div.style.display = "none";
         }
