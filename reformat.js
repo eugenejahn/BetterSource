@@ -204,16 +204,16 @@ function toggleCategoryForm() {
 }
 
 function getScore(){
-  var tittle = document.getElementById('tittle');
+  var title = document.getElementById('title');
   var assignmentScore= document.getElementById('assignmentScore');
   var overallScore = document.getElementById('overallScore');
   var category = document.getElementById('categoryList');
   
-  tittle = tittle.value;
+  title = title.value;
   assignmentScore= assignmentScore.value;
   overallScore = overallScore.value;
   category = category.value;
-  return[tittle,assignmentScore,overallScore, category];
+  return[title,assignmentScore,overallScore, category];
 }
 function getCategory() {
   var title = document.getElementById('newCategoryName');
@@ -224,7 +224,7 @@ function getCategory() {
 }
 
 function cleanUpScoreForm(){
-  document.getElementById('tittle').value = "";
+  document.getElementById('title').value = "";
   document.getElementById('assignmentScore').value = "";
   document.getElementById('overallScore').value = "";
   //document.getElementById('category').value = "";
@@ -247,7 +247,7 @@ function addNewScore() {
   // get score from getScore 
   var newScoreList = getScore();
   var score = Object();
-  score.tittle = newScoreList[0];
+  score.title = newScoreList[0];
   score.assignmentScore = newScoreList[1];
   score.overallScore= newScoreList[2];
   var category = newScoreList[3];
@@ -259,7 +259,7 @@ function addNewScore() {
   }
 
   // create new li 
-  if ( score.tittle !== "" &&  score.assignmentScore!== "" && score.overallScore !== "" ){
+  if ( score.title !== "" &&  score.assignmentScore!== "" && score.overallScore !== "" ){
     // check score is a number
     if (isNumber(score.assignmentScore) && isNumber(score.overallScore)){
       var li = document.createElement("li");
@@ -275,7 +275,7 @@ function addNewScore() {
 
       
 
-      var inputValue =  score.tittle + " " + score.assignmentScore+ "/" + score.overallScore + " " + gradeLetter + " " + percentScore + '%';
+      var inputValue =  score.title + " " + score.assignmentScore+ "/" + score.overallScore + " " + gradeLetter + " " + percentScore + '%';
 
       var tmp = document.createTextNode(inputValue);
       // add inputvalue into li
@@ -303,7 +303,7 @@ function addNewScore() {
           var scoreIndex;
           alert(categoryIndex);
           for(j = 0; j < categories[categoryIndex].grades.length; j++){
-            if (score.tittle == categories[categoryIndex].grades[j].tittle) {
+            if (score.title == categories[categoryIndex].grades[j].title) {
               scoreIndex = j;
             }
           }
