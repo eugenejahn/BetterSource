@@ -183,6 +183,9 @@
 var pointsPossible = 0;
 var pointsEarned = 0;
 var categories = [];
+var closeList = [];
+
+
 function toggleScoreForm() {
 
   var x = document.getElementById("scoreform"); 
@@ -250,9 +253,12 @@ function addNewScore() {
   score.title = newScoreList[0];
   score.assignmentScore = newScoreList[1];
   score.overallScore= newScoreList[2];
-  var category = newScoreList[3];
+
+  // string not include in object score
+  score.category = newScoreList[3];
+
   for(var i = 0; i < categories.length; ++i){
-    if (categories[i].title === category) {
+    if (categories[i].title === score.category) {
       categories[i].grades.push(score);
       //alert('score pushed to category' + category);
     }
@@ -290,30 +296,28 @@ function addNewScore() {
       span.className = "close";
       span.appendChild(txt);
       li.appendChild(span);
+      closeList.push(score);
+
 
 
       for (i = 0; i < close.length; i++) {
-        close[i].onclick = function() {
-          var categoryIndex;
-          for(j = 0; j < categories.length; j++){
-            if (categories[j].title == category) {
-              categoryIndex = j;
-            }
-          }
-          var scoreIndex;
-          alert(categoryIndex);
-          for(j = 0; j < categories[categoryIndex].grades.length; j++){
-            if (score.title == categories[categoryIndex].grades[j].title) {
-              scoreIndex = j;
-            }
-          }
 
-          categories[categoryIndex].grades.splice(scoreIndex - 1, 1);
-          overallGrade = isNaN(calculateOverallGrade()) ? '' : calculateOverallGrade();
-          document.getElementById("score").innerHTML = String(overallGrade);
-          var div = this.parentElement;
-          div.style.display = "none";
-        }
+
+          (function(index){
+            close[i].onclick = function(){
+
+              // put the score information of the button 
+              alert(index);
+              console.log(closeList);
+
+              updateScore(closeList[index]);
+              var div = this.parentElement;
+              div.style.display = "none";
+            }    
+        })(i);
+        // close[i].onclick = function() {
+        //   updateScore[i]
+        // }
       }
 
       // clean up the form 
@@ -327,6 +331,27 @@ function addNewScore() {
   }else{
     alert("You didn't fill out yet!")
   }
+}
+function updateScore(score){
+
+  var categoryIndex;
+  for(j = 0; j < categories.length; j++){
+    if (categories[j].title == score.category ) {
+      categoryIndex = j;
+    }
+  }
+
+  var scoreIndex;
+  //alert(categoryIndex);
+  for(j = 0; j < categories[categoryIndex].grades.length; j++){
+    if (score.title == categories[categoryIndex].grades[j].title && score.assignmentScore ==  categories[categoryIndex].grades[j].assignmentScore && score.overallScore ==  categories[categoryIndex].grades[j].overallScore) {
+      scoreIndex = j;
+    }
+  }
+
+  categories[categoryIndex].grades.splice(scoreIndex , 1);
+  overallGrade = isNaN(calculateOverallGrade()) ? '' : calculateOverallGrade();
+  document.getElementById("score").innerHTML = String(overallGrade);
 }
 
 function addCategory() {
