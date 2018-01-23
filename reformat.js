@@ -296,28 +296,26 @@ function addNewScore() {
       span.className = "close";
       span.appendChild(txt);
       li.appendChild(span);
+
+
+      // this is the list to store the score information of close
       closeList.push(score);
-
-
 
       for (i = 0; i < close.length; i++) {
 
+        // pass parameter i as index
+        (function(index){
+          close[i].onclick = function(){
 
-          (function(index){
-            close[i].onclick = function(){
+            // put the score information of the button 
+            removeScore(closeList[index]);
 
-              // put the score information of the button 
-              alert(index);
-              console.log(closeList);
-
-              updateScore(closeList[index]);
-              var div = this.parentElement;
-              div.style.display = "none";
-            }    
+            // hide the cancel thing 
+            var div = this.parentElement;
+            div.style.display = "none";
+          }    
         })(i);
-        // close[i].onclick = function() {
-        //   updateScore[i]
-        // }
+
       }
 
       // clean up the form 
@@ -332,15 +330,14 @@ function addNewScore() {
     alert("You didn't fill out yet!")
   }
 }
-function updateScore(score){
 
+function removeScore(score){
   var categoryIndex;
   for(j = 0; j < categories.length; j++){
     if (categories[j].title == score.category ) {
       categoryIndex = j;
     }
   }
-
   var scoreIndex;
   //alert(categoryIndex);
   for(j = 0; j < categories[categoryIndex].grades.length; j++){
@@ -399,6 +396,7 @@ function addCategory() {
       alert("That category already exists");
   } 
 }
+
 function calculateOverallGrade(){
   weightSum = 0;
   pointsSum = 0;
