@@ -358,6 +358,7 @@ function addCategory() {
   var newCategoryList = getCategory();
   var title = newCategoryList[0];
   var weight = newCategoryList[1]
+  //creates a new category object and assigns it values based on user input
   var category = Object();
   category.title = title;
   category.weight = weight;
@@ -374,15 +375,16 @@ function addCategory() {
   // create new li 
   if (!alreadyExists) { 
   if ( title !== "" && weight !== ""){
-    // check score is a number
+    // check weight is a number
     if (isNumber(weight)){
+      //adds the category as an option on the drop down list
       var opt = document.createElement('option');
-
-      
       opt.value = title;
       opt.innerHTML = title;
       document.getElementById("categoryList").appendChild(opt);
-      categories.push(category);      
+      //adds category to a global categories list
+      categories.push(category);
+      //clears category form      
       toggleCategoryForm();
       cleanUpCategoryForm();
     }else{
@@ -401,13 +403,14 @@ function calculateOverallGrade(){
   weightSum = 0;
   pointsSum = 0;
   for (var i = 0; i < categories.length; i++) {
+    //stores the point values for each category
     pointsEarnedSum = 0;
     pointsPossibleSum = 0;
-    //alert(categories[i].grades.length)
     for (var j = 0; j < categories[i].grades.length; j++) {
       pointsEarnedSum += parseFloat(categories[i].grades[j].assignmentScore);
       pointsPossibleSum += parseFloat(categories[i].grades[j].overallScore);
     }
+    //records the score of the category based on its weight
     weightSum += parseFloat(categories[i].weight);
     pointsSum += parseFloat(categories[i].weight * (pointsEarnedSum/pointsPossibleSum));
   }
