@@ -354,7 +354,7 @@ function addNewScore() {
 function removeScore(score){
   var categoryIndex;
   for(j = 0; j < categories.length; j++){
-    if (categories[j].title == score.category ) {
+    if (categories[j].title == score.category) {
       categoryIndex = j;
     }
   }
@@ -424,13 +424,15 @@ function calculateOverallGrade(){
     //stores the point values for each category
     pointsEarnedSum = 0;
     pointsPossibleSum = 0;
-    for (var j = 0; j < categories[i].grades.length; j++) {
-      pointsEarnedSum += parseFloat(categories[i].grades[j].assignmentScore);
-      pointsPossibleSum += parseFloat(categories[i].grades[j].overallScore);
-    }
+    if(categories[i].grades.length > 0) {
+      for (var j = 0; j < categories[i].grades.length; j++) {
+        pointsEarnedSum += parseFloat(categories[i].grades[j].assignmentScore);
+        pointsPossibleSum += parseFloat(categories[i].grades[j].overallScore);
+      }
     //records the score of the category based on its weight
-    weightSum += parseFloat(categories[i].weight);
-    pointsSum += parseFloat(categories[i].weight * (pointsEarnedSum/pointsPossibleSum));
+      weightSum += parseFloat(categories[i].weight);
+      pointsSum += parseFloat(categories[i].weight * (pointsEarnedSum/pointsPossibleSum));
+    }
   }
 
   // return two decinamls  
@@ -450,7 +452,7 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById("submitScoreButton").addEventListener("click",
         function() {
         addNewScore();
-
+        
         var a = document.getElementById("myUL").innerHTML;
         chrome.storage.sync.set({ "ul" : a }, function() {
             if (chrome.runtime.error) {
