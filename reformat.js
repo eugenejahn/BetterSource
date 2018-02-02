@@ -179,10 +179,33 @@
 // reformatSource();
 
 
+
+// popup.js
+
+window.onload = function() {
+  chrome.storage.sync.get("data", function(items) {
+    if (!chrome.runtime.error && items != "undefined") {
+      console.log(items);
+
+      document.getElementById("score").innerHTML = items.data;
+    }
+  });
+  chrome.storage.sync.get("ul", function(items) {
+    if (!chrome.runtime.error && items != "undefined") {
+      console.log(items);
+
+      document.getElementById("myUL").appendChild(items);
+    }
+  });
+}
+
 // change the display of the scoreform div 
 var pointsPossible = 0;
 var pointsEarned = 0;
 var categories = [];
+var closeList = [];
+
+
 function toggleScoreForm() {
 
   var x = document.getElementById("scoreform"); 
@@ -204,17 +227,16 @@ function toggleCategoryForm() {
 }
 
 function getScore(){
-  var tittle = document.getElementById('tittle');
-  var assignmentScore = document.getElementById('assignmentScore');
+  var title = document.getElementById('title');
+  var assignmentScore= document.getElementById('assignmentScore');
   var overallScore = document.getElementById('overallScore');
-  //var category = document.getElementById('category');
+  var category = document.getElementById('categoryList');
   
-  tittle = tittle.value;
-  assignmentScore = assignmentScore.value;
+  title = title.value;
+  assignmentScore= assignmentScore.value;
   overallScore = overallScore.value;
-  //category = category.value;
-
-  return[tittle,assignmentScore,overallScore];
+  category = category.value;
+  return[title,assignmentScore,overallScore, category];
 }
 function getCategory() {
   var title = document.getElementById('newCategoryName');
@@ -225,7 +247,7 @@ function getCategory() {
 }
 
 function cleanUpScoreForm(){
-  document.getElementById('tittle').value = "";
+  document.getElementById('title').value = "";
   document.getElementById('assignmentScore').value = "";
   document.getElementById('overallScore').value = "";
   //document.getElementById('category').value = "";
@@ -247,35 +269,39 @@ function addNewScore() {
 
   // get score from getScore 
   var newScoreList = getScore();
-  var tittle = newScoreList[0];
-  var assignmentScore= newScoreList[1];
-  var overallScore= newScoreList[2];
-  //var category = newScoreList[3];
+  var score = Object();
+  score.title = newScoreList[0];
+  score.assignmentScore = newScoreList[1];
+  score.overallScore= newScoreList[2];
+
+  // string not include in object score
+  score.category = newScoreList[3];
+
+  for(var i = 0; i < categories.length; ++i){
+    if (categories[i].title === score.category) {
+      categories[i].grades.push(score);
+      //alert('score pushed to category' + category);
+    }
+  }
 
   // create new li 
-  if ( tittle !== "" &&  assignmentScore !== "" && overallScore !== "" ){
+  if ( score.title !== "" &&  score.assignmentScore!== "" && score.overallScore !== "" ){
     // check score is a number
-    if (isNumber(assignmentScore) && isNumber(overallScore)){
+    if (isNumber(score.assignmentScore) && isNumber(score.overallScore)){
       var li = document.createElement("li");
-      var percentScore = assignmentScore/overallScore;
+      var percentScore = score.assignmentScore/score.overallScore;
       var gradeLetter = percentScore >= .93 ? 'A' : percentScore >= .9 ? 'A-' : percentScore >= .86 ? 'B+' : percentScore >= .83 ? 'B' : percentScore >= .8 ? 'B-' : 'E';
-      pointsEarned = parseFloat(pointsEarned);
-      pointsPossible = parseFloat(pointsPossible);
-      pointsEarned += parseFloat(assignmentScore);
-      pointsPossible += parseFloat(overallScore);
-      var classScore = ((pointsEarned/pointsPossible) * 100).toFixed(2);
-      document.getElementById("score").innerHTML = String(classScore); 
-      // round the percent to 1 decimal
-      percentScore = (percentScore * 100).toFixed(1);
+      var overallGrade = calculateOverallGrade();
+      //alert(overallGrade);
+      document.getElementById("score").innerHTML = String(overallGrade); 
 
-      // round the percent to 1 decimal
       
-
+      percentScore = (100*percentScore).toFixed(2)
       // create input value
 
-      var inputValue =  tittle + " " + assignmentScore + "/" + overallScore + " " + gradeLetter + " "+ (percentScore) + '%';
+      
 
-      var inputValue =  tittle + " " + assignmentScore + "/" + overallScore + " " + gradeLetter + " " + percentScore + '%';
+      var inputValue =  score.title + " " + score.assignmentScore+ "/" + score.overallScore + " " + gradeLetter + " " + percentScore + '%';
 
       var tmp = document.createTextNode(inputValue);
       // add inputvalue into li
@@ -292,11 +318,24 @@ function addNewScore() {
       li.appendChild(span);
 
 
+      // this is the list to store the score information of close
+      closeList.push(score);
+
       for (i = 0; i < close.length; i++) {
-        close[i].onclick = function() {
-          var div = this.parentElement;
-          div.style.display = "none";
-        }
+
+        // pass parameter i as index
+        (function(index){
+          close[i].onclick = function(){
+
+            // put the score information of the button 
+            removeScore(closeList[index]);
+
+            // hide the cancel thing 
+            var div = this.parentElement;
+            div.style.display = "none";
+          }    
+        })(i);
+
       }
 
       // clean up the form 
@@ -312,38 +351,93 @@ function addNewScore() {
   }
 }
 
+function removeScore(score){
+  var categoryIndex;
+  for(j = 0; j < categories.length; j++){
+    if (categories[j].title == score.category) {
+      categoryIndex = j;
+    }
+  }
+  var scoreIndex;
+  //alert(categoryIndex);
+  for(j = 0; j < categories[categoryIndex].grades.length; j++){
+    if (score.title == categories[categoryIndex].grades[j].title && score.assignmentScore ==  categories[categoryIndex].grades[j].assignmentScore && score.overallScore ==  categories[categoryIndex].grades[j].overallScore) {
+      scoreIndex = j;
+    }
+  }
+
+  categories[categoryIndex].grades.splice(scoreIndex , 1);
+  overallGrade = isNaN(calculateOverallGrade()) ? '' : calculateOverallGrade();
+  document.getElementById("score").innerHTML = String(overallGrade);
+}
+
 function addCategory() {
   var newCategoryList = getCategory();
   var title = newCategoryList[0];
   var weight = newCategoryList[1]
+  //creates a new category object and assigns it values based on user input
   var category = Object();
   category.title = title;
   category.weight = weight;
   category.grades = [];
+  var alreadyExists = false;
+  for (var i = 0; i < categories.length; i++) {
+
+    if(categories[i].title === category.title) {
+      alreadyExists = true;
+    }
+  }
   //var category = newScoreList[3];
 
   // create new li 
+  if (!alreadyExists) { 
   if ( title !== "" && weight !== ""){
-    // check score is a number
+    // check weight is a number
     if (isNumber(weight)){
+      //adds the category as an option on the drop down list
       var opt = document.createElement('option');
-
-      
       opt.value = title;
       opt.innerHTML = title;
       document.getElementById("categoryList").appendChild(opt);
-      categories.push(category);      
+      //adds category to a global categories list
+      categories.push(category);
+      //clears category form      
       toggleCategoryForm();
       cleanUpCategoryForm();
     }else{
-      alert("Pleaze enter a number not random characters!")
+      alert("Pleaze enter a number not random characters!");
     }
 
   }else{
-    alert("You didn't fill out yet!")
+    alert("You didn't fill out yet!");
   }
 }
+  else {
+      alert("That category already exists");
+  } 
+}
 
+function calculateOverallGrade(){
+  weightSum = 0;
+  pointsSum = 0;
+  for (var i = 0; i < categories.length; i++) {
+    //stores the point values for each category
+    pointsEarnedSum = 0;
+    pointsPossibleSum = 0;
+    if(categories[i].grades.length > 0) {
+      for (var j = 0; j < categories[i].grades.length; j++) {
+        pointsEarnedSum += parseFloat(categories[i].grades[j].assignmentScore);
+        pointsPossibleSum += parseFloat(categories[i].grades[j].overallScore);
+      }
+    //records the score of the category based on its weight
+      weightSum += parseFloat(categories[i].weight);
+      pointsSum += parseFloat(categories[i].weight * (pointsEarnedSum/pointsPossibleSum));
+    }
+  }
+
+  // return two decinamls  
+  return  (100*pointsSum/weightSum).toFixed(2);
+}
 
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -358,6 +452,26 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById("submitScoreButton").addEventListener("click",
         function() {
         addNewScore();
+        
+        var a = document.getElementById("myUL").innerHTML;
+        chrome.storage.sync.set({ "ul" : a }, function() {
+            if (chrome.runtime.error) {
+              console.log("Runtime error.");
+            }
+            console.log(a);
+
+          }
+        );
+
+        var d = document.getElementById("score").innerHTML;
+          chrome.storage.sync.set({ "data" : d }, function() {
+            if (chrome.runtime.error) {
+              console.log("Runtime error.");
+            }
+            console.log(d);
+
+          }
+        );
         // I put toggle into addNewScore
       
     }, false);
@@ -372,3 +486,11 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     )
 });
+
+
+
+
+
+
+
+
