@@ -182,22 +182,22 @@
 
 // popup.js
 
-window.onload = function() {
-  chrome.storage.sync.get("data", function(items) {
-    if (!chrome.runtime.error && items != "undefined") {
-      console.log(items);
+// window.onload = function() {
+//   chrome.storage.sync.get("data", function(items) {
+//     if (!chrome.runtime.error && items != "undefined") {
+//       console.log(items);
 
-      document.getElementById("score").innerHTML = items.data;
-    }
-  });
-  chrome.storage.sync.get("ul", function(items) {
-    if (!chrome.runtime.error && items != "undefined") {
-      console.log(items);
+//       document.getElementById("score").innerHTML = items.data;
+//     }
+//   });
+//   chrome.storage.sync.get("ul", function(items) {
+//     if (!chrome.runtime.error && items != "undefined") {
+//       console.log(items);
 
-      document.getElementById("myUL").appendChild(items);
-    }
-  });
-}
+//       document.getElementById("myUL").appendChild(items);
+//     }
+//   });
+// }
 
 // change the display of the scoreform div 
 var pointsPossible = 0;
@@ -453,25 +453,25 @@ document.addEventListener('DOMContentLoaded', function() {
         function() {
         addNewScore();
         
-        var a = document.getElementById("myUL").innerHTML;
-        chrome.storage.sync.set({ "ul" : a }, function() {
-            if (chrome.runtime.error) {
-              console.log("Runtime error.");
-            }
-            console.log(a);
+        // var a = document.getElementById("myUL").innerHTML;
+        // chrome.storage.sync.set({ "ul" : a }, function() {
+        //     if (chrome.runtime.error) {
+        //       console.log("Runtime error.");
+        //     }
+        //     console.log(a);
 
-          }
-        );
+        //   }
+        // );
 
-        var d = document.getElementById("score").innerHTML;
-          chrome.storage.sync.set({ "data" : d }, function() {
-            if (chrome.runtime.error) {
-              console.log("Runtime error.");
-            }
-            console.log(d);
+        // var d = document.getElementById("score").innerHTML;
+        //   chrome.storage.sync.set({ "data" : d }, function() {
+        //     if (chrome.runtime.error) {
+        //       console.log("Runtime error.");
+        //     }
+        //     console.log(d);
 
-          }
-        );
+        //   }
+        // );
         // I put toggle into addNewScore
       
     }, false);
