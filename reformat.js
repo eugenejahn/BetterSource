@@ -439,7 +439,6 @@ function calculateOverallGrade(){
   return  (100*pointsSum/weightSum).toFixed(2);
 }
 
-
 document.addEventListener('DOMContentLoaded', function() {
 
     // listner for newsScoreButton
