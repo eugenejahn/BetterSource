@@ -189,6 +189,7 @@ reformatSource();
 
 
 var weight = [];
+var names = [];
 
 var t = document.getElementById("sps-assignment-categories").getElementsByTagName("tbody")[0]; // This have to be the ID of your table, not the tag
 
@@ -196,7 +197,9 @@ for(i=0;i< t.getElementsByTagName("tr").length;i++){
   var d = t.getElementsByTagName("tr")[i];  
   var r = d.getElementsByTagName("td")[1];
   var value = r.innerHTML;
+  var name = d.getElementsByTagName("td")[0].innerHTML;
   weight.push(value);
+  names.push(name);
 }
 
 
@@ -207,7 +210,8 @@ chrome.runtime.onMessage.addListener(function (msg, sender, response) {
     // (For your specific requirements `document.querySelectorAll(...)`
     //  should be equivalent to jquery's `$(...)`)
     var domInfo = {
-      total: weight
+      weight: weight,
+      names: names
     };
 
     // Directly respond to the sender (popup), 

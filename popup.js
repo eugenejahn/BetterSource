@@ -287,7 +287,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 function setDOMInfo(info) {
-  alert(info.total);
+  alert(info.weight);
+  x = String(info.weight);
+  x = x.split('%');
+  alert(info.names);
+  alert(x[0]);
 }
 
 
