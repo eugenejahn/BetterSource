@@ -63,10 +63,9 @@ function isNumber(n) {
 }
 
 
-function addNewScore() {
+function addNewScore(newScoreList) {
 
   // get score from getScore 
-  var newScoreList = getScore();
   var score = Object();
   score.title = newScoreList[0];
   score.assignmentScore = newScoreList[1];
@@ -169,8 +168,7 @@ function removeScore(score){
   document.getElementById("score").innerHTML = String(overallGrade);
 }
 
-function addCategory() {
-  var newCategoryList = getCategory();
+function addCategory(newCategoryList) {
   var title = newCategoryList[0];
   var weight = newCategoryList[1]
   //creates a new category object and assigns it values based on user input
@@ -249,7 +247,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // listner for submitScoreButton
     document.getElementById("submitScoreButton").addEventListener("click",
         function() {
-        addNewScore();
+        addNewScore(getScore());
         
         // var a = document.getElementById("myUL").innerHTML;
         // chrome.storage.sync.set({ "ul" : a }, function() {
@@ -280,18 +278,26 @@ document.addEventListener('DOMContentLoaded', function() {
     )
     document.getElementById("submitCategoryButton").addEventListener("click",
         function() {
-          addCategory();
+          addCategory(getCategory());
         }
     )
 });
 
 
 function setDOMInfo(info) {
-  alert(info.weight);
-  x = String(info.weight);
-  x = x.split('%');
-  alert(info.names);
-  alert(x[0]);
+  category = [];
+  for(i = 0; i < info.weight.length; i++) {
+    category = [];
+    category.push(info.names[i]);
+    category.push(parseFloat(info.weight[i]));
+    addCategory(category);
+    categoryScore = [];
+    categoryScore.push(info.names[i]);
+    categoryScore.push(info.pointsEarned[i]);
+    categoryScore.push(info.pointsPossible[i]);
+    categoryScore.push(info.names[i]);
+    addNewScore(categoryScore);
+  }
 }
 
 
