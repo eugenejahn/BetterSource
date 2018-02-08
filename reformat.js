@@ -64,7 +64,7 @@ function reformatHeader() {
         var banner = document.getElementsByClassName("navbar navbar-default")[0];
         banner.style = "margin-top: 0 !important";
         var image = banner.getElementsByTagName("img")[0];
-        image.src = "https://avatars3.githubusercontent.com/u/8658063?s=400&v=4.png"
+        image.src = "https://raw.githubusercontent.com/eugenejahn/BetterSource/master/Inked8658063_LI.png";
         image.height = 240;
         image.width = 1500;
         var userInfo = document.getElementById("topbar-tools");
