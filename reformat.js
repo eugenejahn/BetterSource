@@ -188,7 +188,7 @@ reformatSource();
 //alert(assignmentsTable);
 
 
-var weight = [];
+var weights = [];
 var names = [];
 var pointsPossibleList = [];
 var pointsEarnedList = [];
@@ -197,11 +197,19 @@ var t = document.getElementById("sps-assignment-categories").getElementsByTagNam
 for(i=0;i< t.getElementsByTagName("tr").length;i++){
   var d = t.getElementsByTagName("tr")[i];  
   var r = d.getElementsByTagName("td")[1];
-  var value = r.innerHTML;
+  var weight = r.innerHTML;
+  weight = weight.slice(0,-1);
   var name = d.getElementsByTagName("td")[0].innerHTML;
   var pointsPossible = d.getElementsByTagName("td")[3].innerHTML;
   var pointsEarned = d.getElementsByTagName("td")[4].innerHTML;
-  weight.push(value);
+
+  var namelist =  name.split("(");
+  name = namelist[1];
+  name = name.slice(0,-1);
+  console.log(name);
+
+
+  weights.push(weight);
   names.push(name);
   pointsPossibleList.push(pointsPossible);
   pointsEarnedList.push(pointsEarned);
@@ -215,7 +223,7 @@ chrome.runtime.onMessage.addListener(function (msg, sender, response) {
     // (For your specific requirements `document.querySelectorAll(...)`
     //  should be equivalent to jquery's `$(...)`)
     var domInfo = {
-      weight: weight,
+      weight: weights,
       names: names,
       pointsPossible: pointsPossibleList,
       pointsEarned: pointsEarnedList
