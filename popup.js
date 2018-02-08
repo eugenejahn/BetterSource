@@ -284,18 +284,32 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
-function setDOMInfo(info) {
+function putDataToCategory(info) {
   category = [];
+  var firstCategory = true;
   for(i = 0; i < info.weight.length; i++) {
     category = [];
-    category.push(info.names[i]);
-    category.push(parseFloat(info.weight[i]));
-    addCategory(category);
+    var weight = info.weight[i];
+    var categoryName = info.names[i];
+    if(!isNumber(weight)){
+      categoryName = "same";
+      if (firstCategory){
+        category.push(categoryName);
+        category.push(10);
+        addCategory(category);
+        firstCategory = false;
+      }
+    }else{
+      category.push(categoryName);
+      category.push(parseFloat(weight));
+      addCategory(category);
+    }
+
     categoryScore = [];
     categoryScore.push(info.names[i]);
     categoryScore.push(info.pointsEarned[i]);
     categoryScore.push(info.pointsPossible[i]);
-    categoryScore.push(info.names[i]);
+    categoryScore.push(categoryName);
     addNewScore(categoryScore);
   }
 }
@@ -313,6 +327,6 @@ window.addEventListener('DOMContentLoaded', function () {
         {from: 'popup', subject: 'DOMInfo'},
         // ...also specifying a callback to be called 
         //    from the receiving end (content script)
-        setDOMInfo);
+        putDataToCategory);
   });
 });
