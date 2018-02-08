@@ -190,8 +190,8 @@ reformatSource();
 
 var weight = [];
 var names = [];
-// var pointsPossible = [];
-// var pointsEarned = [];
+var pointsPossibleList = [];
+var pointsEarnedList = [];
 var t = document.getElementById("sps-assignment-categories").getElementsByTagName("tbody")[0]; // This have to be the ID of your table, not the tag
 
 for(i=0;i< t.getElementsByTagName("tr").length;i++){
@@ -199,12 +199,12 @@ for(i=0;i< t.getElementsByTagName("tr").length;i++){
   var r = d.getElementsByTagName("td")[1];
   var value = r.innerHTML;
   var name = d.getElementsByTagName("td")[0].innerHTML;
-  // var pointsPossible = d.getElementsByTagName("td")[3].innerHTML;
-  // var pointsEarned = d.getElementsByTagName("td")[4].innerHTML;
+  var pointsPossible = d.getElementsByTagName("td")[3].innerHTML;
+  var pointsEarned = d.getElementsByTagName("td")[4].innerHTML;
   weight.push(value);
   names.push(name);
-  // pointsPossible.push(pointsPossible);
-  // pointsPossible.push(pointsEarned);
+  pointsPossibleList.push(pointsPossible);
+  pointsEarnedList.push(pointsEarned);
 }
 
 
@@ -217,8 +217,8 @@ chrome.runtime.onMessage.addListener(function (msg, sender, response) {
     var domInfo = {
       weight: weight,
       names: names,
-      // pointsPossible: pointsPossible,
-      // pointsEarned: pointsEarned
+      pointsPossible: pointsPossibleList,
+      pointsEarned: pointsEarnedList
     };
 
     // Directly respond to the sender (popup), 
