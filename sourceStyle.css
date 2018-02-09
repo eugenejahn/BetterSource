@@ -20,7 +20,7 @@ justify-content: space-between;
 }
 
 input[type="text"] {
-	background: transparent;
+  background: transparent;
     border: none;
     border-bottom: 1px solid #000000;
     padding: 2px 5px;
@@ -34,7 +34,7 @@ input[type="text"] {
 
 #scoreform{
 
-	display: none;
+  display: none;
 }
 
 #categoryform{
