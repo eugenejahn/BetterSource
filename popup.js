@@ -312,6 +312,27 @@ function putDataToCategory(info) {
     categoryScore.push(categoryName);
     addNewScore(categoryScore);
   }
+
+  var exceptScore = document.getElementById("score").innerHTML;
+  var realScore   = info.overallScore;
+
+  // if it has dec check equal or not
+  // if int check between ceil and floor
+  console.log(exceptScore);
+  console.log(realScore);
+  
+  if(realScore % 1 != 0){
+    if (!(realScore == exceptScore)){
+      document.getElementById("teacherIssue").innerHTML = "Your teacher sucks! you can't use this app";
+    }
+  }else{
+    if (!(realScore <= Math.ceil(exceptScore) && realScore>= Math.floor(exceptScore))){
+      document.getElementById("teacherIssue").innerHTML = "Your teacher sucks! you can't use this app";
+    }
+  }
+
+
+
 }
 
 

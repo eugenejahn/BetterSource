@@ -187,6 +187,12 @@ reformatSource();
 //var assignmentsTable = document.getElementById("sps-assignment-categories").getElementsByTagName("tbody")[1];
 //alert(assignmentsTable);
 
+var overallScore = document.getElementById("main").children[0].children[1].innerHTML;
+overallScore = overallScore.split("<br>")[1];
+overallScore = parseFloat(overallScore.slice(0,-1));
+console.log(overallScore);
+
+
 
 var weights = [];
 var names = [];
@@ -226,7 +232,8 @@ chrome.runtime.onMessage.addListener(function (msg, sender, response) {
       weight: weights,
       names: names,
       pointsPossible: pointsPossibleList,
-      pointsEarned: pointsEarnedList
+      pointsEarned: pointsEarnedList,
+      overallScore: overallScore
     };
 
     // Directly respond to the sender (popup), 
