@@ -40,9 +40,15 @@ input[type="text"] {
 #categoryform{
   display: none;
 }
+#teacherIssue{
+  color: red;
+  font-weight: lighter;
+  font-size: 11px;
+}
 
 #addCategoryButton{
   padding: 3px 7px;
   font-size: 15px!important;
 
 }
+
