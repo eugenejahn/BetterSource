@@ -313,7 +313,7 @@ function putDataToCategory(info) {
     addNewScore(categoryScore);
   }
 
-  var exceptScore = document.getElementById("score").innerHTML;
+  var exceptScore = parseFloat(document.getElementById("score").innerHTML);
   var realScore   = info.overallScore;
 
   // if it has dec check equal or not
@@ -338,7 +338,8 @@ function putDataToCategory(info) {
       document.getElementById("teacherIssue").style.color = "black";
     }
   }
-
+  document.getElementById("scoreform").style.display = "none";
+  document.getElementById("categoryform").style.display = "none";
 
 
 }
