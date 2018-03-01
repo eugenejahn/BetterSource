@@ -11,6 +11,10 @@ margin: 10px;
 h1 {
 font-size: 20px;
 color: navy;
+margin: 1px;
+padding-left: : 1px;
+display: inline;
+
 }
 
 #container {
@@ -44,6 +48,11 @@ input[type="text"] {
   color: red;
   font-weight: lighter;
   font-size: 11px;
+  text-align: right;
+  float: right;
+  display: inline;
+  margin-top: 2px;
+
 }
 
 #addCategoryButton{
@@ -54,4 +63,10 @@ input[type="text"] {
 #score{
   font-size: 20px;
 }
+
+#score{
+  margin-top: 5px;
+  font-size: 20px;
+}
+
 

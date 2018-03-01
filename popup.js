@@ -323,18 +323,18 @@ function putDataToCategory(info) {
   
   if(realScore % 1 != 0){
     if (!(realScore.toFixed(1) == exceptScore.toFixed(1))){
-      document.getElementById("teacherIssue").innerHTML = "<br/>Your teacher uses special weighting. <br/>Calculations may be inaccurate.";
+      document.getElementById("teacherIssue").innerHTML = "Your teacher uses special weighting.<br/>Calculations may be inaccurate.";
     }
   }else{
     if (!(realScore <= Math.ceil(exceptScore) && realScore>= Math.floor(exceptScore))){
-      document.getElementById("teacherIssue").innerHTML = "<br/> Your teacher uses special weighting. <br/>Calculations may be inaccurate.";
+      document.getElementById("teacherIssue").innerHTML = "Your teacher uses special weighting.<br/>Calculations may be inaccurate.";
     }
     else if(realScore-.5 > exceptScore) {
-      document.getElementById("teacherIssue").innerHTML = "<br/>Your teacher rounds to the <br/>nearest whole number";
+      document.getElementById("teacherIssue").innerHTML = "Your teacher rounds to the<br/>nearest whole number";
       document.getElementById("teacherIssue").style.color = "black";
     }
     else  { 
-      document.getElementById("teacherIssue").innerHTML = "<br/>Your teacher rounds to the <br/>nearest whole number";
+      document.getElementById("teacherIssue").innerHTML = "Your teacher rounds to the<br/>nearest whole number";
       document.getElementById("teacherIssue").style.color = "black";
     }
   }
