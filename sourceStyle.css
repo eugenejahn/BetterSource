@@ -9,7 +9,7 @@ margin: 10px;
 }
 
 h1 {
-font-size: 15px;
+font-size: 20px;
 color: navy;
 }
 
@@ -50,5 +50,8 @@ input[type="text"] {
   padding: 3px 7px;
   font-size: 15px!important;
 
+}
+#score{
+  font-size: 20px;
 }
 
