@@ -130,6 +130,7 @@ function addNewScore(newScoreList) {
             // hide the cancel thing 
             var div = this.parentElement;
             div.style.display = "none";
+            displayCategories();
           }    
         })(i);
 
@@ -146,6 +147,7 @@ function addNewScore(newScoreList) {
   }else{
     alert("You didn't fill out yet!")
   }
+
 }
 
 function removeScore(score){
@@ -166,6 +168,7 @@ function removeScore(score){
   categories[categoryIndex].grades.splice(scoreIndex , 1);
   overallGrade = isNaN(calculateOverallGrade()) ? '' : calculateOverallGrade();
   document.getElementById("score").innerHTML = String(overallGrade);
+  
 }
 
 function addCategory(newCategoryList) {
@@ -248,6 +251,7 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById("submitScoreButton").addEventListener("click",
         function() {
         addNewScore(getScore());
+        displayCategories();
         
         // var a = document.getElementById("myUL").innerHTML;
         // chrome.storage.sync.set({ "ul" : a }, function() {
@@ -311,6 +315,7 @@ function putDataToCategory(info) {
     categoryScore.push(info.pointsPossible[i]);
     categoryScore.push(categoryName);
     addNewScore(categoryScore);
+    displayCategories();
   }
 
   var exceptScore = parseFloat(document.getElementById("score").innerHTML);
@@ -360,3 +365,27 @@ window.addEventListener('DOMContentLoaded', function () {
         putDataToCategory);
   });
 });
+
+function displayCategories() {
+  var ul = document.getElementById("categoryScoreList");
+  console.log("ddd");
+  if (ul) {
+    while (ul.firstChild) {
+      ul.removeChild(ul.firstChild);
+    }
+  }
+  for (var i = 0; i < categories.length; i++) {
+    var pointsEarned = 0;
+    var pointsPossible = 0;
+    for (var j = 0; j < categories[i].grades.length; j++) {
+      var grade = categories[i].grades[j];
+      pointsEarned += parseFloat(grade.assignmentScore);
+      pointsPossible += parseFloat(grade.overallScore);
+    }
+    element = categories[i].title + " " + pointsEarned + "/" + pointsPossible;
+    var x = document.createTextNode(element);
+    var li = document.createElement('li');
+    li.appendChild(x);
+    ul.appendChild(li);
+  }
+}
