@@ -29,10 +29,12 @@ input[type="text"] {
     border-bottom: 1px solid #000000;
     padding: 2px 5px;
     outline: none;
-
-
+    font-family: "Lucida Console", Monaco, monospace;
+    font-size: 15px;
     width: 100px;
     height: 20px;
+    min-width: 18px;
+    max-width: 80px; 
 
 }
 
@@ -68,5 +70,4 @@ input[type="text"] {
   margin-top: 5px;
   font-size: 20px;
 }
-
 
