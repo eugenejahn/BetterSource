@@ -138,7 +138,7 @@ function addNewScore(newScoreList) {
       // clean up the form 
       cleanUpScoreForm();
       // hide the form
-      toggleScoreForm();
+      scoreform.style.display = "none";
     }else{
       alert("Pleaze enter a number not random characters!")
     }
@@ -198,7 +198,7 @@ function addCategory(newCategoryList) {
       //adds category to a global categories list
       categories.push(category);
       //clears category form      
-      toggleCategoryForm();
+      categoryform.style.display = "none";
       cleanUpCategoryForm();
     }else{
       alert("Pleaze enter a number not random characters!");
@@ -322,6 +322,7 @@ window.addEventListener('DOMContentLoaded', function () {
     currentWindow: true
   }, function (tabs) {
     // ...and send a request for the DOM info...
+
     chrome.tabs.sendMessage(
         tabs[0].id,
         {from: 'popup', subject: 'DOMInfo'},
