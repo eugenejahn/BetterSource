@@ -108,11 +108,11 @@ function addNewScore(newScoreList) {
 
 
       var close = document.getElementsByClassName("close");
-      var span = document.createElement("SPAN");
+      var button = document.createElement("BUTTON");
       var txt = document.createTextNode("\u00D7");
-      span.className = "close";
-      span.appendChild(txt);
-      li.appendChild(span);
+      button.className = "close";
+      button.appendChild(txt);
+      li.appendChild(button);
 
 
       // this is the list to store the score information of close

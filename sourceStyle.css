@@ -46,3 +46,14 @@ input[type="text"] {
   font-size: 15px!important;
 
 }
+
+.close {
+  padding: 3px 7px;
+  background: transparent;
+  font-size: 15px!important;
+  border: none;
+}
+.close:hover {
+    background-color: #4CAF50; /* Green */
+    color: white;
+}
