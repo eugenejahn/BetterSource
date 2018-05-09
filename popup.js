@@ -109,7 +109,8 @@ function addNewScore(newScoreList) {
 
       var close = document.getElementsByClassName("close");
       var button = document.createElement("BUTTON");
-      var txt = document.createTextNode("\u00D7");
+      // var txt = document.createTextNode("\u00D7");
+      var txt = document.createTextNode("Edit | Delete");
       button.className = "close";
       button.appendChild(txt);
       li.appendChild(button);
