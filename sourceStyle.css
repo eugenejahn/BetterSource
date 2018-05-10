@@ -48,12 +48,25 @@ input[type="text"] {
 }
 
 .close {
-  padding: 3px 7px;
+  padding: 7px 7px;
   background: transparent;
-  font-size: 15px!important;
+  font-size: 19px!important;
   border: none;
 }
+
 .close:hover {
+    background-color: #4CAF50; /* Green */
+    color: white;
+}
+
+.edit {
+  padding: 7px 7px;
+  background: transparent;
+  font-size: 19px!important;
+  border: none;
+}
+
+.edit:hover {
     background-color: #4CAF50; /* Green */
     color: white;
 }

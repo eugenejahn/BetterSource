@@ -106,14 +106,24 @@ function addNewScore(newScoreList) {
       // add li to popup.html
       document.getElementById("myUL").appendChild(li);
 
+      var editButton = document.createElement("BUTTON");
+      var txt = document.createTextNode("mode_edit");
+      // var txt = document.createTextNode("Edit | Delete");
+      editButton.className = "material-icons edit";
+      editButton.appendChild(txt);
+      li.appendChild(editButton);
+
 
       var close = document.getElementsByClassName("close");
-      var button = document.createElement("BUTTON");
+      var delButton = document.createElement("BUTTON");
       // var txt = document.createTextNode("\u00D7");
-      var txt = document.createTextNode("Edit | Delete");
-      button.className = "close";
-      button.appendChild(txt);
-      li.appendChild(button);
+      var txt = document.createTextNode("delete");
+      delButton.className = "material-icons close";
+      delButton.appendChild(txt);
+      li.appendChild(delButton);
+
+      
+
 
 
       // this is the list to store the score information of close
