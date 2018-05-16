@@ -70,3 +70,15 @@ input[type="text"] {
     background-color: #4CAF50; /* Green */
     color: white;
 }
+
+.editAssignmentScore {
+  width: 70px !important;
+  height: 20px;
+
+}
+
+.editOverallScore{
+  width: 70px !important;
+  height: 20px;
+
+}

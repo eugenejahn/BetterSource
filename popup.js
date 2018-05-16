@@ -4,6 +4,16 @@ var categories = [];
 var closeList = [];
 
 
+
+function toggle(x) {
+  
+  if (x.style.display === "block") {
+      x.style.display = "none";
+  } else {
+      x.style.display = "block";
+  }
+}
+
 function toggleScoreForm() {
 
   var x = document.getElementById("scoreform"); 
@@ -106,6 +116,7 @@ function addNewScore(newScoreList) {
       // add li to popup.html
       document.getElementById("myUL").appendChild(li);
 
+      var edit = document.getElementsByClassName("edit");
       var editButton = document.createElement("BUTTON");
       var txt = document.createTextNode("mode_edit");
       // var txt = document.createTextNode("Edit | Delete");
@@ -122,8 +133,19 @@ function addNewScore(newScoreList) {
       delButton.appendChild(txt);
       li.appendChild(delButton);
 
-      
 
+      // create div 
+      var editBox = document.createElement('div');
+      editBox.className = "editBox";
+      // editBox.innerHTML =
+      //   'Assignment title: <input type="text" class = "editTitle" maxlength="10">\
+      //   Score: <input type="text" class = "editAssignmentScore" maxlength="4"> / <input type="text"  class = "editOverallScore" maxlength="4">\
+      //   ';
+      editBox.innerHTML = 'Score: <input type="text" class = "editAssignmentScore" maxlength="4"> / <input type="text"  class = "editOverallScore" maxlength="4">\
+        ';
+      editBox.style.display = "none";
+
+      li.appendChild(editBox);
 
 
       // this is the list to store the score information of close
@@ -144,7 +166,25 @@ function addNewScore(newScoreList) {
           }    
         })(i);
 
+        (function(index){
+          edit[i].onclick = function(){
+
+            // put the score information of the button 
+            // removeScore(closeList[index]);
+
+            // hide the cancel thing 
+
+            var div = this.parentElement;
+            console.log(div.getElementsByClassName("editBox")[0]);
+            toggle(div.getElementsByClassName("editBox")[0]);
+            //div.getElementsByClassName("editBox")[0].style.display = "block";
+            // div.style.display = "none";
+          }    
+        })(i);
+
       }
+
+
 
       // clean up the form 
       cleanUpScoreForm();
