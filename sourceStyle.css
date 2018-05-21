@@ -1,3 +1,66 @@
+
+
+
+/*submit button 
+*/
+
+
+
+
+/*  font:{
+    size:12px;
+    weight:bold;
+  }
+  cursor: pointer;
+  transition: all 0.25s ease;
+  &:hover {
+    color:white;
+    background: $green;
+  }
+  &:active {
+    //letter-spacing: 2px;
+    letter-spacing: 2px ;
+  }
+  &:after {
+    content:"SUBMIT";
+  }
+}*/
+
+/*.onclic {
+  width: 40px;
+  border-color:$gray;
+  border-width:3px;
+  font-size:0;
+  border-left-color:$green;
+  animation: rotating 2s 0.25s linear infinite;
+
+  &:after {
+    content:"";
+  }
+  &:hover {
+    color:$green;
+    background: white;
+  }
+}
+.validate {
+  font-size:13px;
+  color: white;
+  background: $green;
+  &:after {
+    font-family:'FontAwesome';
+    content:"\f00c";
+  }
+}*/
+
+/*@keyframes rotating {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}*/
+
 td a {
   display: block;
   height:100%;
@@ -72,13 +135,72 @@ input[type="text"] {
 }
 
 .editAssignmentScore {
-  width: 70px !important;
+  width: 50px !important;
   height: 20px;
 
 }
 
 .editOverallScore{
-  width: 70px !important;
+  width: 50px !important;
   height: 20px;
 
+}
+
+
+button.submitEdit {
+  outline: none;
+  height: 20px;
+  text-align: center;
+  width: 50px;
+  border-radius: 40px;
+  background: #fff;
+  border: 2px solid #1ECD97;
+  color: #1ECD97;
+  letter-spacing: 1px;
+  /* size: 12px; */
+  font-size: 9px;
+  /*font:{
+    size:12px;
+    weight:bold;
+  };*/
+  cursor: pointer;
+  transition: all 0.25s ease;
+/*  &:hover {
+    color:white;
+    background: $green;
+  }
+  &:active {
+    //letter-spacing: 2px;
+    letter-spacing: 2px ;
+  }
+  &:after {
+    content:"SUBMIT";
+  }*/
+}
+
+button.submitEdit:hover {
+  width: 40px;
+  border-color:$gray;
+  border-width:3px;
+  font-size:0;
+  border-left-color:$green;
+  animation: rotating 2s 0.25s linear infinite;
+
+/*  &:after {
+    content:"";
+  }
+  &:hover {
+    color:$green;
+    background: white;
+  }*/
+}
+
+.validate {
+  font-size:13px;
+  color: white;
+  background: $green;
+  &:after {
+    font-family:'FontAwesome';
+    content:"\f00c";
+  }
 }

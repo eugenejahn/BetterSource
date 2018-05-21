@@ -133,7 +133,8 @@ function addNewScore(newScoreList) {
       delButton.appendChild(txt);
       li.appendChild(delButton);
 
-
+      var submitEdit = document.getElementsByClassName("submitEdit");
+      
       // create div 
       var editBox = document.createElement('div');
       editBox.className = "editBox";
@@ -141,8 +142,7 @@ function addNewScore(newScoreList) {
       //   'Assignment title: <input type="text" class = "editTitle" maxlength="10">\
       //   Score: <input type="text" class = "editAssignmentScore" maxlength="4"> / <input type="text"  class = "editOverallScore" maxlength="4">\
       //   ';
-      editBox.innerHTML = 'Score: <input type="text" class = "editAssignmentScore" maxlength="4"> / <input type="text"  class = "editOverallScore" maxlength="4">\
-        ';
+      editBox.innerHTML = 'Score: <input type="text" class = "editAssignmentScore" maxlength="4"> / <input type="text"  class = "editOverallScore" maxlength="4">   <button class = "submitEdit" >Submit</button>';
       editBox.style.display = "none";
 
       li.appendChild(editBox);
@@ -175,10 +175,46 @@ function addNewScore(newScoreList) {
             // hide the cancel thing 
 
             var div = this.parentElement;
-            console.log(div.getElementsByClassName("editBox")[0]);
+            //console.log(div.getElementsByClassName("editBox")[0]);
             toggle(div.getElementsByClassName("editBox")[0]);
+
+            
             //div.getElementsByClassName("editBox")[0].style.display = "block";
             // div.style.display = "none";
+          }    
+        })(i);
+
+        (function(index){
+          submitEdit[i].onclick = function(){
+
+            
+            var div = this.parentElement;
+            console.log(div.getElementsByClassName("editAssignmentScore")[0].value);
+            console.log(div.getElementsByClassName("editOverallScore")[0].value);
+            toggle(div);
+            //div.getElementsByClassName("editBox")[0].style.display = "block";
+            // div.style.display = "none";
+            console.log(closeList[index]);
+            var score = closeList[index];
+            var categoryIndex;
+            for(j = 0; j < categories.length; j++){
+              if (categories[j].title == score.category) {
+                categoryIndex = j;
+              }
+            }
+            var scoreIndex;
+            //alert(categoryIndex);
+            for(j = 0; j < categories[categoryIndex].grades.length; j++){
+              if (score.title == categories[categoryIndex].grades[j].title && score.assignmentScore ==  categories[categoryIndex].grades[j].assignmentScore && score.overallScore ==  categories[categoryIndex].grades[j].overallScore) {
+                scoreIndex = j;
+              }
+            }
+            console.log(categories[categoryIndex].grades[scoreIndex].assignmentScore);
+            categories[categoryIndex].grades[scoreIndex].assignmentScore = div.getElementsByClassName("editAssignmentScore")[0].value;
+            categories[categoryIndex].grades[scoreIndex].overallScore = div.getElementsByClassName("editOverallScore")[0].value;
+            // categories[categoryIndex].grades
+            overallGrade = isNaN(calculateOverallGrade()) ? '' : calculateOverallGrade();
+            document.getElementById("score").innerHTML = String(overallGrade);
           }    
         })(i);
 
