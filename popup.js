@@ -213,6 +213,14 @@ function addNewScore(newScoreList) {
             categories[categoryIndex].grades[scoreIndex].assignmentScore = div.getElementsByClassName("editAssignmentScore")[0].value;
             categories[categoryIndex].grades[scoreIndex].overallScore = div.getElementsByClassName("editOverallScore")[0].value;
             // categories[categoryIndex].grades
+
+            var li = div.parentElement;
+            percentScore =  categories[categoryIndex].grades[scoreIndex].assignmentScore/ categories[categoryIndex].grades[scoreIndex].overallScore;
+            gradeLetter = percentScore >= .93 ? 'A' : percentScore >= .9 ? 'A-' : percentScore >= .86 ? 'B+' : percentScore >= .83 ? 'B' : percentScore >= .8 ? 'B-' : 'E';
+            percentScore = (100*percentScore).toFixed(2)
+            
+            li.childNodes[0].nodeValue = categories[categoryIndex].grades[scoreIndex].title + " " + categories[categoryIndex].grades[scoreIndex].assignmentScore+ "/" + categories[categoryIndex].grades[scoreIndex].overallScore + " " + gradeLetter + " " + percentScore + '%';;
+
             overallGrade = isNaN(calculateOverallGrade()) ? '' : calculateOverallGrade();
             document.getElementById("score").innerHTML = String(overallGrade);
           }    
