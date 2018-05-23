@@ -142,7 +142,7 @@ function addNewScore(newScoreList) {
       //   'Assignment title: <input type="text" class = "editTitle" maxlength="10">\
       //   Score: <input type="text" class = "editAssignmentScore" maxlength="4"> / <input type="text"  class = "editOverallScore" maxlength="4">\
       //   ';
-      editBox.innerHTML = 'Score: <input type="text" class = "editAssignmentScore" maxlength="4"> / <input type="text"  class = "editOverallScore" maxlength="4">   <button class = "submitEdit" >Submit</button>';
+      editBox.innerHTML = 'Score: <input type="text" class = "editAssignmentScore" value='+ score.assignmentScore +' maxlength="4"> / <input type="text"  class = "editOverallScore" value='+ score.overallScore +' maxlength="4">   <button class = "submitEdit" >Submit</button>';
       editBox.style.display = "none";
 
       li.appendChild(editBox);

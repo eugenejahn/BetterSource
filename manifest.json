@@ -3,7 +3,7 @@
 
   "name": "Better Source",
   "description": "This extension reformats the Seattle Schools website \"The Source\". It's unofficial so don't contact Seattle Schools if its broken.",
-  "version": "1.1",
+  "version": "1.4",
   "icons": {
      "16": "icon.png",
      "48": "icon48.png",
