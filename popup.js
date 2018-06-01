@@ -339,6 +339,12 @@ document.addEventListener('DOMContentLoaded', function() {
       toggleScoreForm();
     }, false);
 
+    document.getElementById("infoButton").addEventListener("click",
+        function() {
+          chrome.tabs.create({url: 'https://www.youtube.com/watch?v=_lVdStP26tU'});
+        }
+    );
+
     // listner for submitScoreButton
     document.getElementById("submitScoreButton").addEventListener("click",
         function() {
@@ -426,3 +432,15 @@ window.addEventListener('DOMContentLoaded', function () {
         putDataToCategory);
   });
 });
+
+// $(document).ready(function(){
+//    $('body').on('click', 'a', function(){
+//      chrome.tabs.create({url: $(this).attr('href')});
+//      return false;
+//    });
+// });
+// document.getElementById("do_install").onclick = function() {
+//   chrome.webstore.install(onSuccess, onFailure);
+// };
+
+
