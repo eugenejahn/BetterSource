@@ -23,7 +23,7 @@
   "content_scripts" : [
     {
       "matches": ["https://ps.seattleschools.org/*"],
-      "css": ["sourceStyle.css"],
+      
       "js": ["reformat.js"]
     }
   ]
