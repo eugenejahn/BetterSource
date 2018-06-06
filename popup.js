@@ -97,7 +97,7 @@ function addNewScore(newScoreList) {
     if (isNumber(score.assignmentScore) && isNumber(score.overallScore)){
       var li = document.createElement("li");
       var percentScore = score.assignmentScore/score.overallScore;
-      var gradeLetter = percentScore >= .93 ? 'A' : percentScore >= .9 ? 'A-' : percentScore >= .86 ? 'B+' : percentScore >= .83 ? 'B' : percentScore >= .8 ? 'B-' : 'E';
+      var gradeLetter = percentScore >= .93 ? 'A' : percentScore >= .9 ? 'A-' : percentScore >= .86 ? 'B+' : percentScore >= .83 ? 'B' : percentScore >= .8 ? 'B-' : percentScore >= .77 ? 'C+' : percentScore >= .73 ? 'C' : percentScore >= .7 ? 'C-' : percentScore >= .67 ? 'D+' : percentScore >= .63 ? 'D' : percentScore >= .6 ? 'D-' : 'E';
       var overallGrade = calculateOverallGrade();
       //alert(overallGrade);
       document.getElementById("score").innerHTML = String(overallGrade); 
