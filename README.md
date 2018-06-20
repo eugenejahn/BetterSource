@@ -1,6 +1,6 @@
 ﻿# BetterSource
 
-Description: It is a chrome extension helping student to calculate and predict their grade
+Description: It is a chrome extension helping student to calculate and predict their grade in the Source
 
 Follow the step in this link to set up the code in Chrome: https://developer.chrome.com/extensions/getstarted
 
