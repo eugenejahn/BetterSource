@@ -193,7 +193,9 @@ var names = [];
 var pointsPossibleList = [];
 var pointsEarnedList = [];
 var t = document.getElementById("sps-assignment-categories").getElementsByTagName("tbody")[0]; // This have to be the ID of your table, not the tag
-
+var actualGrade = document.getElementsByClassName("center")[1].getElementsByTagName("td")[3].innerText;
+actualGrade = actualGrade.replace(/\D/g,'');
+actualGrade = parseInt(actualGrade);
 for(i=0;i< t.getElementsByTagName("tr").length;i++){
   var d = t.getElementsByTagName("tr")[i];  
   var r = d.getElementsByTagName("td")[1];
@@ -226,7 +228,8 @@ chrome.runtime.onMessage.addListener(function (msg, sender, response) {
       weight: weights,
       names: names,
       pointsPossible: pointsPossibleList,
-      pointsEarned: pointsEarnedList
+      pointsEarned: pointsEarnedList,
+      actualGrade: actualGrade
     };
 
     // Directly respond to the sender (popup), 

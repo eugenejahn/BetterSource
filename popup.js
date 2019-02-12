@@ -2,8 +2,8 @@ var pointsPossible = 0;
 var pointsEarned = 0;
 var categories = [];
 var closeList = [];
-
-
+var actualGrade;
+var overallGrade;
 
 function toggle(x) {
   
@@ -261,6 +261,7 @@ function removeScore(score){
   categories[categoryIndex].grades.splice(scoreIndex , 1);
   overallGrade = isNaN(calculateOverallGrade()) ? '' : calculateOverallGrade();
   document.getElementById("score").innerHTML = String(overallGrade);
+
 }
 
 function addCategory(newCategoryList) {
@@ -326,7 +327,8 @@ function calculateOverallGrade(){
     }
   }
 
-  // return two decinamls  
+  // return two decinamls
+  overallGrade = (100*pointsSum/weightSum).toFixed(2);
   return  (100*pointsSum/weightSum).toFixed(2);
 }
 
@@ -412,7 +414,17 @@ function putDataToCategory(info) {
     categoryScore.push(info.pointsPossible[i]);
     categoryScore.push(categoryName);
     addNewScore(categoryScore);
+    
   }
+  actualGrade = info.actualGrade;
+  displayErrorMessage();
+
+
+}
+function displayErrorMessage() {
+        if (overallGrade < actualGrade - 1 || overallGrade > actualGrade + 1) {
+          document.getElementById("errormessage").style.display = "block"; 
+        }
 }
 
 
